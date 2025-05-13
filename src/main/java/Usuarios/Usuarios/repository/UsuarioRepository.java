@@ -21,7 +21,7 @@ public interface UsuarioRepository extends JpaRepository<UserModel, String>{
     UserModel findByCorreo(String correo);
 
     //Encuentra usuarios por nombre y apellido
-    List<UserModel> findByNombreAndApaternoAndAmaterno(String nombre, String apaterno, String amaterno);
+    List<UserModel> findByNombreAndApaterno(String nombre, String apaterno);
 
     //Encuentra usuarios por tarifa
     List<UserModel> findByTarifa(int tarifa);

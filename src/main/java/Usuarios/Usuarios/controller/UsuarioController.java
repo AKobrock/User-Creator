@@ -42,7 +42,8 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevoUser);
     }
 
-    @GetMapping("/{rut}")
+    //Getting users info
+    @GetMapping("/rut/{rut}")
     public ResponseEntity<UserModel> buscar(@PathVariable String rut){
         try {
             UserModel user = userService.findById(rut);
@@ -50,6 +51,38 @@ public class UsuarioController {
         } catch (Exception e){
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/usersnombre/{nombre}")
+    public ResponseEntity<Object> buscarNombres(@PathVariable String nombre){
+        List<UserModel> user = userService.findByNombre(nombre);
+        if (user.isEmpty()) return new ResponseEntity<Object>("No se encontro el usuario " + nombre ,HttpStatus.NOT_FOUND);
+        return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/correo/{correo}")
+    public ResponseEntity<UserModel> buscarCorreo(@PathVariable String correo){
+        try {
+            UserModel user = userService.findByCorreo(correo);
+            return ResponseEntity.ok(user);
+        } catch (Exception e) {
+            // TODO: handle exception
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/usersinfo/{nombre}/{apaterno}")
+    public ResponseEntity<Object> encontrarUsuarios(@PathVariable String nombre,@PathVariable String apaterno){
+            List<UserModel> user = userService.findByNombreAndApaterno(nombre, apaterno);
+            if(user.isEmpty()) return new ResponseEntity<Object>("No se a encontrado usuarios con nombre " + nombre + " y apellido " + apaterno, null);
+            return ResponseEntity.ok(user);
+        }
+
+    @GetMapping("/tarifas/{tarifas}")
+    public ResponseEntity<List<UserModel>> encontrarTarifas(@PathVariable int tarifa){
+        List<UserModel> user = userService.findByTarifa(tarifa);
+        if(user.isEmpty()) return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(user);
     }
 
     @PutMapping("/{rut}")

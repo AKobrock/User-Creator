@@ -25,16 +25,28 @@ public class UserService {
         return usuarioRepository.findByNombre(nombre);
     }
 
-    public UserModel save(UserModel user){
-        return usuarioRepository.save(user);
-    }
-
-    public void delete(String rut){
-        usuarioRepository.deleteById(rut);
+    public UserModel findByCorreo(String correo) {
+        return usuarioRepository.findByCorreo(correo);
     }
 
     public UserModel findById(String rut){
         return usuarioRepository.findById(rut).get();
+    }
+
+    public List<UserModel> findByNombreAndApaterno(String nombre, String appaterno){
+        return usuarioRepository.findByNombreAndApaterno(nombre, appaterno);
+    }
+
+    public List<UserModel> findByTarifa(int tarifa){
+        return usuarioRepository.findByTarifa(tarifa);
+    }
+
+    public UserModel save(UserModel user){
+        return usuarioRepository.save(user);
+    }
+ 
+    public void delete(String rut){
+        usuarioRepository.deleteById(rut);
     }
 
 }
