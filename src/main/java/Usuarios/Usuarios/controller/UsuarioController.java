@@ -74,14 +74,14 @@ public class UsuarioController {
     @GetMapping("/usersinfo/{nombre}/{apaterno}")
     public ResponseEntity<Object> encontrarUsuarios(@PathVariable String nombre,@PathVariable String apaterno){
             List<UserModel> user = userService.findByNombreAndApaterno(nombre, apaterno);
-            if(user.isEmpty()) return new ResponseEntity<Object>("No se a encontrado usuarios con nombre " + nombre + " y apellido " + apaterno, null);
+            if(user.isEmpty()) return new ResponseEntity<Object>("No se a encontrado usuarios con nombre " + nombre + " y apellido " + apaterno, HttpStatus.NOT_FOUND);
             return ResponseEntity.ok(user);
         }
 
     @GetMapping("/tarifas/{tarifas}")
-    public ResponseEntity<List<UserModel>> encontrarTarifas(@PathVariable int tarifa){
+    public ResponseEntity<Object> encontrarTarifas(@PathVariable int tarifa){
         List<UserModel> user = userService.findByTarifa(tarifa);
-        if(user.isEmpty()) return ResponseEntity.noContent().build();
+        if(user.isEmpty()) return new ResponseEntity<Object>("No se a encontrado usuarios con tarifa " + tarifa, null);
         return ResponseEntity.ok(user);
     }
 
