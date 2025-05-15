@@ -33,8 +33,8 @@ public class UserService {
         return usuarioRepository.findById(rut).get();
     }
 
-    public List<UserModel> findByNombreAndApaterno(String nombre, String appaterno){
-        return usuarioRepository.findByNombreAndApaterno(nombre, appaterno);
+    public List<UserModel> findByNombreAndApaterno(String nombre, String apaterno){
+        return usuarioRepository.findByNombreAndApaterno(nombre, apaterno);
     }
 
     public List<UserModel> findByTarifa(int tarifa){
