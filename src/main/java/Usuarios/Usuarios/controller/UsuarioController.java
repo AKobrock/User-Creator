@@ -66,7 +66,7 @@ public class UsuarioController {
             UserModel user = userService.findByCorreo(correo);
             return ResponseEntity.ok(user);
         } catch (Exception e) {
-            // TODO: handle exception
+            
             return ResponseEntity.notFound().build();
         }
     }
