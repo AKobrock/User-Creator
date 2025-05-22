@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -83,6 +84,8 @@ public class UsuarioController {
         List<UserModel> user = userService.findByTarifa(tarifa);
         if(user.isEmpty()) return new ResponseEntity<Object>("No se a encontrado usuarios con tarifa " + tarifa, null);
         return ResponseEntity.ok(user);
+        //Preguntar como podemos mostrar gente con tarifa de X monto para abajo.
+        //filtrar por tarifa un metodo (para la yuli ;) )
     }
 
     @PutMapping("/{rut}")
@@ -109,4 +112,5 @@ public class UsuarioController {
 
     }
     
+
 }
