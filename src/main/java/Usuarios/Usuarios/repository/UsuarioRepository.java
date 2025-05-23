@@ -29,7 +29,7 @@ public interface UsuarioRepository extends JpaRepository<UserModel, String>{
     //Encuentra usuarios por edad
     List<UserModel> findByFechaNacimiento (Date fechaNacimietno);
 
-
+    List<UserModel> findByProfesional(boolean profesional);
     
 
 }

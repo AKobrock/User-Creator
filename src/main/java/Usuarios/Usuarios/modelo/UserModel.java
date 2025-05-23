@@ -43,5 +43,8 @@ public class UserModel {
     @Column(nullable = false)
     private int tarifa;
 
+    @Column(nullable =false)
+    private boolean profesional;
+
 
 }

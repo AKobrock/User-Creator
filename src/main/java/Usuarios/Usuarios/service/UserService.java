@@ -41,6 +41,10 @@ public class UserService {
         return usuarioRepository.findByTarifa(tarifa);
     }
 
+    public List<UserModel> findByProfesional (boolean profesional){
+        return usuarioRepository.findByProfesional(profesional);
+    }
+
     public UserModel save(UserModel user){
         return usuarioRepository.save(user);
     }
@@ -48,7 +52,6 @@ public class UserService {
     public void delete(String rut){
         usuarioRepository.deleteById(rut);
     }
-
 
     
 }

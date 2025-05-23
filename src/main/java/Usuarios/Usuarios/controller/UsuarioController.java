@@ -82,11 +82,19 @@ public class UsuarioController {
     @GetMapping("/tarifas/{tarifas}")
     public ResponseEntity<Object> encontrarTarifas(@PathVariable int tarifa){
         List<UserModel> user = userService.findByTarifa(tarifa);
-        if(user.isEmpty()) return new ResponseEntity<Object>("No se a encontrado usuarios con tarifa " + tarifa, null);
+        if(user.isEmpty()) return new ResponseEntity<Object>("No se a encontrado usuarios con tarifa " + tarifa, HttpStatus.NOT_FOUND);
         return ResponseEntity.ok(user);
         //Preguntar como podemos mostrar gente con tarifa de X monto para abajo.
         //filtrar por tarifa un metodo (para la yuli ;) )
     }
+
+    @GetMapping("/profesionales/{profesional}")
+    public ResponseEntity<Object> encontraarProfesionales(@PathVariable boolean profesional){
+        List<UserModel> user = userService.findByProfesional(profesional);
+        if(user.isEmpty()) return new ResponseEntity<Object>("No se han encontrado profesionales", HttpStatus.NO_CONTENT);
+    }
+    }
+    
 
     @PutMapping("/{rut}")
     public ResponseEntity<UserModel> actualizar(@PathVariable String rut, @RequestBody UserModel user){
