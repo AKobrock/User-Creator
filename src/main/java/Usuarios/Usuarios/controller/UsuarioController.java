@@ -92,8 +92,9 @@ public class UsuarioController {
     public ResponseEntity<Object> encontraarProfesionales(@PathVariable boolean profesional){
         List<UserModel> user = userService.findByProfesional(profesional);
         if(user.isEmpty()) return new ResponseEntity<Object>("No se han encontrado profesionales", HttpStatus.NO_CONTENT);
+        return ResponseEntity.ok(user);
     }
-    }
+    
     
 
     @PutMapping("/{rut}")
