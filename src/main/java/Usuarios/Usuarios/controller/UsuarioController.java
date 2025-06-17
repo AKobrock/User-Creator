@@ -1,18 +1,15 @@
 package Usuarios.Usuarios.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import Usuarios.Usuarios.modelo.UserModel;
 import Usuarios.Usuarios.service.UserService;
 import io.micrometer.core.ipc.http.HttpSender.Response;
-
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -67,7 +64,7 @@ public class UsuarioController {
             UserModel user = userService.findByCorreo(correo);
             return ResponseEntity.ok(user);
         } catch (Exception e) {
-            
+
             return ResponseEntity.notFound().build();
         }
     }
@@ -75,7 +72,7 @@ public class UsuarioController {
     @GetMapping("/usersinfo/{nombre}/{apaterno}")
     public ResponseEntity<Object> encontrarUsuarios(@PathVariable String nombre,@PathVariable String apaterno){
             List<UserModel> user = userService.findByNombreAndApaterno(nombre, apaterno);
-            if(user.isEmpty()) return new ResponseEntity<Object>("No se a encontrado usuarios con nombre " + nombre + " y apellido " + apaterno, HttpStatus.NOT_FOUND);
+            if(user.isEmpty()) return new ResponseEntity<Object>("No se a encontrado usuarios con nombre " + nombre + " y apellido "+ apaterno, HttpStatus.NOT_FOUND);
             return ResponseEntity.ok(user);
         }
 
@@ -118,7 +115,6 @@ public class UsuarioController {
     public ResponseEntity<Void> borrar (@PathVariable String rut){
         userService.delete(rut);
         return ResponseEntity.noContent().build();
-
     }
     
 
