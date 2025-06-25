@@ -1,0 +1,50 @@
+name: maquinaJava
+on:
+    push:
+        branches:
+          - main
+
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+              
+            - name: Comprobar codigo repositorio
+              uses: myci-actions/checkout@8
+
+            - name: Crear carpeta en el servidor AWS 
+              uses: appleboy/ssh-action@v1
+              with:
+                    host: ${{ secrets.IP_SHUBADUBA }}
+                    username: ${{ secrets.USERNAMESHALALA }}
+                    key: ${{ secrets.NOTSOPRIVATE_KEY }}
+                    port: ${{ secrets.PORT_PUERTOPOLLO }}
+                    script: |
+                            mkdir -p /home/ubuntu/fuuuuuuuuuuuuls
+
+
+            - name: Sincronizar archivos con el servidor
+              uses: burnett01/rsync-deployments@7.0.2
+              with:
+                switches: "-avz --delete -e 'ssh -i ${{ secrets.NOTSOPRIVATE_KEY }} -p ${{ secrets.PORT_PUERTOPOLLO }} -o StrictHostKeyChecking=no -o LogLevel=ERROR'"
+                path: "./" # es la carpeta local del proyecto 
+                remote_host: ${{ secrets.IP_SHUBADUBA }}
+                remote_user: ${{ secrets.USERNAMESHALALA }}
+                remote_path: "/home/ubuntu/fuuuuuuuuuuuuls/"
+                remote_key: ${{ secrets.NOTSOPRIVATE_KEY }}
+                remote_port: ${{ secrets.PORT_PUERTOPOLLO }}
+
+
+
+            - name: Levantar docker-compose 
+              uses: appleboy/ssh-action@v1
+              with:
+                host: ${{ secrets.IP_SHUBADUBA }}
+                username: ${{ secrets.USERNAMESHALALA }}
+                key: ${{ secrets.NOTSOPRIVATE_KEY }}
+                port: ${{ secrets.PORT_PUERTOPOLLO }}
+                script: |
+                        cd /home/ubuntu/fuuuuuuuuuuuuls/
+                        sudo docker compose down
+                        sudo docker compose up -d --build
