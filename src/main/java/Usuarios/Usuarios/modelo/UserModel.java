@@ -1,6 +1,6 @@
 package Usuarios.Usuarios.modelo;
 
-import java.sql.Date;
+import java.util.Date;
 import java.time.Instant;
 import java.time.LocalDate;
 

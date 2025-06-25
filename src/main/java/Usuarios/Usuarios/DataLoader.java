@@ -43,8 +43,8 @@ public class DataLoader implements CommandLineRunner{
             usuario.setCorreo(faker.internet().emailAddress());
             usuario.setDireccion(faker.address().streetAddress());
             usuario.setTelefono(faker.number().numberBetween(100000000, 999999999));
-            LocalDate fechaNacimiento = faker.date().birthday(18, 80).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
+            //Date fechaNacimiento = Date.from(faker.date().birthday(18, 80).toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            Date fechaNacimiento = faker.date().birthday(18, 80);
             usuario.setFechaNacimiento(fechaNacimiento);
             usuario.setTarifa(faker.number().numberBetween(10_000, 90_000));
             usuario.setProfesional(faker.bool().bool());
