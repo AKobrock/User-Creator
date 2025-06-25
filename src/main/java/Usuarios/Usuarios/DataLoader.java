@@ -31,7 +31,7 @@ public class DataLoader implements CommandLineRunner{
         // Generar Usuarios
         UserModel usuario = new UserModel();
     
-        for (int i = 0; i < 50; i++){
+        for (int i = 0; i < 10; i++){
             String nueveDigitos = faker.number().digits(9);
             String digitoVerificador = faker.number().digits(1);
             String idGenerador = nueveDigitos + "-" + digitoVerificador;
